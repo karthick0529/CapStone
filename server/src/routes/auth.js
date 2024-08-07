@@ -38,12 +38,12 @@ router.post(
         mobile,
       });
 
-      // const salt = await bcrypt.genSalt(10);
-      // user.password = await bcrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
 
       await user.save();
-      // console.log("Plain password:", password);
-      // console.log("Hashed password:", user.password);
+      console.log("Plain password:", password);
+      console.log("Hashed password:", user.password);
 
       const payload = {
         user: {
@@ -100,16 +100,16 @@ router.post(
       //   password === user.password;
       // }
 
-      // const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
 
-      // console.log("isMatch:", isMatch);
-      // console.log('Provided password:', password);
-      // console.log('Stored hashed password:', user.password);
+      console.log("isMatch:", isMatch);
+      console.log('Provided password:', password);
+      console.log('Stored hashed password:', user.password);
 
-      // if (!isMatch) {
-      //   console.log('Password mismatch');
-      //   return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
-      // }
+      if (!isMatch) {
+        console.log('Password mismatch');
+        return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
 
       const payload = {
         user: {
